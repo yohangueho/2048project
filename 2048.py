@@ -51,7 +51,33 @@ def save():
     return
 
 def left():
-    return
+    if LABEL_1_1.cget("text") == "": # Si la case 1_1 est vide...
+        pass # ...alors ne rien faire pour cette case
+    else: # Si la case 1_1 n'est pas vide...
+        if LABEL_1_2.cget("text") == "" and LABEL_1_3.cget("text") == "" and LABEL_1_4.cget("text") == "": # ...et que les cases 1_2 ; 1_3 et 1_4 sont vides...
+            pass # ...alors ne rien faire
+        elif LABEL_1_2.cget("text") != "" and LABEL_1_3.cget("text") == "" and LABEL_1_4.cget("text") == "": # ...et que la case 1_2 uniquement n'est pas vide...
+            if LABEL_1_1.cget("text") == LABEL_1_2.cget("text"): # Si les cases 1_1 et 1_2 sont les mêmes, mettre la case 1_1 au double
+                mainCanvas.itemconfig(LABEL_1_1, text=str(int(LABEL_1_1.cget("text"))+int(LABEL_1_2.cget("text"))))
+            else: # Si elles sont différentes, ne rien faire
+                pass
+        elif LABEL_1_2.cget("text") == "" and LABEL_1_3.cget("text") != "" and LABEL_1_4.cget("text") == "": # ...et que la case 1_3 uniquement n'est pas vide...
+            if LABEL_1_1.cget("text") == LABEL_1_3.cget("text"): # Si les cases 1_1 et 1_3 sont les mêmes, mettre la case 1_1 au double
+                mainCanvas.itemconfig(LABEL_1_1, text=str(int(LABEL_1_1.cget("text"))+int(LABEL_1_3.cget("text"))))
+            else: # Si elles sont différentes, déplacer la case 1_3 à la case 1_2 (vers la gauche)
+                mainCanvas.itemconfig(LABEL_1_2, text=str(int(LABEL_1_3.cget("text"))))
+                mainCanvas.itemconfig(LABEL_1_3, text="")
+        elif LABEL_1_2.cget("text") == "" and LABEL_1_3.cget("text") == "" and LABEL_1_3.cget("text") != "": # ...et que la case 1_4 uniquement n'est pas vide...
+            if LABEL_1_1.cget("text") == LABEL_1_3.cget("text"): # Si les cases 1_1 et 1_4 sont les mêmes, mettre la case 1_1 au double
+                mainCanvas.itemconfig(LABEL_1_1, text=str(int(LABEL_1_1.cget("text"))+int(LABEL_1_4.cget("text"))))
+            else: # Si elles sont différentes, déplacer la case 1_4 à la case 1_2 (vers la gauche)
+                mainCanvas.itemconfig(LABEL_1_2, text=str(int(LABEL_1_4.cget("text"))))
+                mainCanvas.itemconfig(LABEL_1_4, text="")
+        
+        
+            
+
+
 
 def up():
     return
@@ -60,9 +86,6 @@ def down():
     return
 
 def right():
-    return
-
-def verify():
     return
 
 # Programme principal
@@ -112,6 +135,9 @@ def affichage():
     mainCanvas.itemconfig(LABEL_4_2, text=number[13])
     mainCanvas.itemconfig(LABEL_4_3, text=number[14])
     mainCanvas.itemconfig(LABEL_4_4, text=number[15])
+
+    print(number, color)
+    return number, color
 
 # Widgets
 
