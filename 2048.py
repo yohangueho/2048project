@@ -51,7 +51,9 @@ def save():
     return
 
 def left():
-    return  
+
+    affichage()
+    return matrice
 
 def up():
     return
