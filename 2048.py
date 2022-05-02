@@ -14,12 +14,14 @@ HAUTEUR = 500
 matrice = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
 
 numbers = [0,2,4,8,16,32,64,128,256,512,1024,2048]
+numbers_text = ["","2","4","8","16","32","64","128","256","512","1024","2048"]
 colors = ["white","yellow","green","brown","purple","pink","grey","orange","blue","skyblue2","skyblue3","cyan"]
 
 
 # Fonctions
 
 def start():
+
     case_1_1 = random.randint(0,3)
     case_1_2 = random.randint(0,3)
     case_2_1 = random.randint(0,3)
@@ -37,6 +39,7 @@ def start():
 
     print(matrice)
     affichage()
+    return matrice
 
 def stop():
     return
@@ -70,30 +73,45 @@ def coup():
 
 def affichage():
     color = []
+    number = []
     for i in range (0,4):
         for j in range (0,4):
             color.append(colors[numbers.index(matrice[i][j])])
-    print (color)
+            number.append(numbers_text[numbers.index(matrice[i][j])])
 
     mainCanvas.itemconfig(CASE_1_1, fill=color[0])
     mainCanvas.itemconfig(CASE_1_2, fill=color[1])
     mainCanvas.itemconfig(CASE_1_3, fill=color[2])
     mainCanvas.itemconfig(CASE_1_4, fill=color[3])
-
     mainCanvas.itemconfig(CASE_2_1, fill=color[4])
     mainCanvas.itemconfig(CASE_2_2, fill=color[5])
     mainCanvas.itemconfig(CASE_2_3, fill=color[6])
     mainCanvas.itemconfig(CASE_2_4, fill=color[7])
-
     mainCanvas.itemconfig(CASE_3_1, fill=color[8])
     mainCanvas.itemconfig(CASE_3_2, fill=color[9])
     mainCanvas.itemconfig(CASE_3_3, fill=color[10])
     mainCanvas.itemconfig(CASE_3_4, fill=color[11])
-
     mainCanvas.itemconfig(CASE_4_1, fill=color[12])
     mainCanvas.itemconfig(CASE_4_2, fill=color[13])
     mainCanvas.itemconfig(CASE_4_3, fill=color[14])
     mainCanvas.itemconfig(CASE_4_4, fill=color[15])
+
+    mainCanvas.itemconfig(LABEL_1_1, text=number[0])
+    mainCanvas.itemconfig(LABEL_1_2, text=number[1])
+    mainCanvas.itemconfig(LABEL_1_3, text=number[2])
+    mainCanvas.itemconfig(LABEL_1_4, text=number[3])
+    mainCanvas.itemconfig(LABEL_2_1, text=number[4])
+    mainCanvas.itemconfig(LABEL_2_2, text=number[5])
+    mainCanvas.itemconfig(LABEL_2_3, text=number[6])
+    mainCanvas.itemconfig(LABEL_2_4, text=number[7])
+    mainCanvas.itemconfig(LABEL_3_1, text=number[8])
+    mainCanvas.itemconfig(LABEL_3_2, text=number[9])
+    mainCanvas.itemconfig(LABEL_3_3, text=number[10])
+    mainCanvas.itemconfig(LABEL_3_4, text=number[11])
+    mainCanvas.itemconfig(LABEL_4_1, text=number[12])
+    mainCanvas.itemconfig(LABEL_4_2, text=number[13])
+    mainCanvas.itemconfig(LABEL_4_3, text=number[14])
+    mainCanvas.itemconfig(LABEL_4_4, text=number[15])
 
 # Widgets
 
@@ -116,30 +134,58 @@ right_button = tk.Button(root, text="RIGHT", height=5, width=10, command=right)
 #Ligne 1
 
 CASE_1_1 =  mainCanvas.create_rectangle(LARGEUR-475, HAUTEUR-475, LARGEUR-365, HAUTEUR-365, fill=colors[0])
+LABEL_1_1 = mainCanvas.create_text((80, 80),text="")
+
 CASE_1_2 = mainCanvas.create_rectangle(LARGEUR-360, HAUTEUR-475, LARGEUR-250, HAUTEUR-365, fill=colors[0])
+LABEL_1_2 = mainCanvas.create_text((195, 80),text="")
+
 CASE_1_3 = mainCanvas.create_rectangle(LARGEUR-245, HAUTEUR-475, LARGEUR-135, HAUTEUR-365, fill=colors[0])
+LABEL_1_3 = mainCanvas.create_text((310, 80),text="")
+
 CASE_1_4 = mainCanvas.create_rectangle(LARGEUR-130, HAUTEUR-475, LARGEUR-20, HAUTEUR-365, fill=colors[0])
+LABEL_1_4 = mainCanvas.create_text((425, 80),text="")
 
 #Ligne 2
 
 CASE_2_1 = mainCanvas.create_rectangle(LARGEUR-475, HAUTEUR-360, LARGEUR-365, HAUTEUR-250, fill=colors[0])
+LABEL_2_1 = mainCanvas.create_text((80, 195),text="")
+
 CASE_2_2 = mainCanvas.create_rectangle(LARGEUR-360, HAUTEUR-360, LARGEUR-250, HAUTEUR-250, fill=colors[0])
+LABEL_2_2 = mainCanvas.create_text((195, 195),text="")
+
 CASE_2_3 = mainCanvas.create_rectangle(LARGEUR-245, HAUTEUR-360, LARGEUR-135, HAUTEUR-250, fill=colors[0])
+LABEL_2_3 = mainCanvas.create_text((310, 195),text="")
+
 CASE_2_4 = mainCanvas.create_rectangle(LARGEUR-130, HAUTEUR-360, LARGEUR-20, HAUTEUR-250, fill=colors[0])
+LABEL_2_4 = mainCanvas.create_text((425, 195),text="")
 
 #Ligne 3
 
 CASE_3_1 = mainCanvas.create_rectangle(LARGEUR-475, HAUTEUR-245, LARGEUR-365, HAUTEUR-135, fill=colors[0])
+LABEL_3_1 = mainCanvas.create_text((80, 310),text="")
+
 CASE_3_2 = mainCanvas.create_rectangle(LARGEUR-360, HAUTEUR-245, LARGEUR-250, HAUTEUR-135, fill=colors[0])
+LABEL_3_2 = mainCanvas.create_text((195, 310),text="")
+
 CASE_3_3 = mainCanvas.create_rectangle(LARGEUR-245, HAUTEUR-245, LARGEUR-135, HAUTEUR-135, fill=colors[0])
+LABEL_3_3 = mainCanvas.create_text((310, 310),text="")
+
 CASE_3_4 = mainCanvas.create_rectangle(LARGEUR-130, HAUTEUR-245, LARGEUR-20, HAUTEUR-135, fill=colors[0])
+LABEL_3_4 = mainCanvas.create_text((425, 310),text="")
 
 #Ligne 4
 
 CASE_4_1 = mainCanvas.create_rectangle(LARGEUR-475, HAUTEUR-130, LARGEUR-365, HAUTEUR-20, fill=colors[0])
+LABEL_4_1 = mainCanvas.create_text((80, 425),text="")
+
 CASE_4_2 = mainCanvas.create_rectangle(LARGEUR-360, HAUTEUR-130, LARGEUR-250, HAUTEUR-20, fill=colors[0])
+LABEL_4_2 = mainCanvas.create_text((195, 425),text="")
+
 CASE_4_3 = mainCanvas.create_rectangle(LARGEUR-245, HAUTEUR-130, LARGEUR-135, HAUTEUR-20, fill=colors[0])
+LABEL_4_3 = mainCanvas.create_text((310, 425),text="")
+
 CASE_4_4 = mainCanvas.create_rectangle(LARGEUR-130, HAUTEUR-130, LARGEUR-20, HAUTEUR-20, fill=colors[0])
+LABEL_4_4 = mainCanvas.create_text((425, 425),text="")
 
 
 mainCanvas.grid(column=0, columnspan=4, row=0)
