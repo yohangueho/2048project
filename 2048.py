@@ -1,4 +1,4 @@
-# Projet
+# Projet 2048
 # Auteurs : TROADEC-SAMOUR Mariam, TAIBI Yanis, GUEHO Yohan
 
 # Importation des modules
@@ -51,32 +51,82 @@ def save():
     return
 
 def left():
-    if LABEL_1_1.cget("text") == "": # Si la case 1_1 est vide...
+    if mainCanvas.itemcget(LABEL_1_1, "text") == "": # Si la case 1_1 est vide...
         pass # ...alors ne rien faire pour cette case
     else: # Si la case 1_1 n'est pas vide...
-        if LABEL_1_2.cget("text") == "" and LABEL_1_3.cget("text") == "" and LABEL_1_4.cget("text") == "": # ...et que les cases 1_2 ; 1_3 et 1_4 sont vides...
+        if mainCanvas.itemcget(LABEL_1_2, "text") == "" and mainCanvas.itemcget(LABEL_1_3, "text") == "" and mainCanvas.itemcget(LABEL_1_4, "text") == "": # ...et que les cases 1_2 ; 1_3 et 1_4 sont vides...
             pass # ...alors ne rien faire
-        elif LABEL_1_2.cget("text") != "" and LABEL_1_3.cget("text") == "" and LABEL_1_4.cget("text") == "": # ...et que la case 1_2 uniquement n'est pas vide...
-            if LABEL_1_1.cget("text") == LABEL_1_2.cget("text"): # Si les cases 1_1 et 1_2 sont les mêmes, mettre la case 1_1 au double
-                mainCanvas.itemconfig(LABEL_1_1, text=str(int(LABEL_1_1.cget("text"))+int(LABEL_1_2.cget("text"))))
+        elif mainCanvas.itemcget(LABEL_1_2, "text") != "" and mainCanvas.itemcget(LABEL_1_3, "text") == "" and mainCanvas.itemcget(LABEL_1_4, "text") == "": # ...et que la case 1_2 uniquement n'est pas vide...
+            if mainCanvas.itemcget(LABEL_1_1, "text") == mainCanvas.itemcget(LABEL_1_2, "text"): # Si les cases 1_1 et 1_2 sont les mêmes, mettre la case 1_1 au double
+                mainCanvas.itemconfig(LABEL_1_1, text=str(int(mainCanvas.itemcget(LABEL_1_1, "text"))+int(mainCanvas.itemcget(LABEL_1_2, "text"))))
+                mainCanvas.itemconfig(LABEL_1_2, text="")
             else: # Si elles sont différentes, ne rien faire
                 pass
-        elif LABEL_1_2.cget("text") == "" and LABEL_1_3.cget("text") != "" and LABEL_1_4.cget("text") == "": # ...et que la case 1_3 uniquement n'est pas vide...
-            if LABEL_1_1.cget("text") == LABEL_1_3.cget("text"): # Si les cases 1_1 et 1_3 sont les mêmes, mettre la case 1_1 au double
-                mainCanvas.itemconfig(LABEL_1_1, text=str(int(LABEL_1_1.cget("text"))+int(LABEL_1_3.cget("text"))))
-            else: # Si elles sont différentes, déplacer la case 1_3 à la case 1_2 (vers la gauche)
-                mainCanvas.itemconfig(LABEL_1_2, text=str(int(LABEL_1_3.cget("text"))))
+        elif mainCanvas.itemcget(LABEL_1_2, "text") == "" and mainCanvas.itemcget(LABEL_1_3, "text") != "" and mainCanvas.itemcget(LABEL_1_4, "text") == "": # ...et que la case 1_3 uniquement n'est pas vide...
+            if mainCanvas.itemcget(LABEL_1_1, "text") == mainCanvas.itemcget(LABEL_1_3, "text"): # Si les cases 1_1 et 1_3 sont les mêmes, mettre la case 1_1 au double
+                mainCanvas.itemconfig(LABEL_1_1, text=str(int(mainCanvas.itemcget(LABEL_1_1, "text"))+int(mainCanvas.itemcget(LABEL_1_3, "text"))))
                 mainCanvas.itemconfig(LABEL_1_3, text="")
-        elif LABEL_1_2.cget("text") == "" and LABEL_1_3.cget("text") == "" and LABEL_1_3.cget("text") != "": # ...et que la case 1_4 uniquement n'est pas vide...
-            if LABEL_1_1.cget("text") == LABEL_1_3.cget("text"): # Si les cases 1_1 et 1_4 sont les mêmes, mettre la case 1_1 au double
-                mainCanvas.itemconfig(LABEL_1_1, text=str(int(LABEL_1_1.cget("text"))+int(LABEL_1_4.cget("text"))))
-            else: # Si elles sont différentes, déplacer la case 1_4 à la case 1_2 (vers la gauche)
-                mainCanvas.itemconfig(LABEL_1_2, text=str(int(LABEL_1_4.cget("text"))))
+            else: # Si elles sont différentes, déplacer la case 1_3 à la case 1_2 (vers la gauche)
+                mainCanvas.itemconfig(LABEL_1_2, text=str(int(mainCanvas.itemcget(LABEL_1_3, "text"))))
+                mainCanvas.itemconfig(LABEL_1_3, text="")
+        elif mainCanvas.itemcget(LABEL_1_2, "text") == "" and mainCanvas.itemcget(LABEL_1_3, "text") == "" and mainCanvas.itemcget(LABEL_1_4, "text") != "": # ...et que la case 1_4 uniquement n'est pas vide...
+            if mainCanvas.itemcget(LABEL_1_1, "text") == mainCanvas.itemcget(LABEL_1_4, "text"): # Si les cases 1_1 et 1_4 sont les mêmes, mettre la case 1_1 au double
+                mainCanvas.itemconfig(LABEL_1_1, text=str(int(mainCanvas.itemcget(LABEL_1_1, "text"))+int(mainCanvas.itemcget(LABEL_1_4, "text"))))
                 mainCanvas.itemconfig(LABEL_1_4, text="")
+            else: # Si elles sont différentes, déplacer la case 1_4 à la case 1_2 (vers la gauche)
+                mainCanvas.itemconfig(LABEL_1_2, text=str(int(mainCanvas.itemcget(LABEL_1_4, "text"))))
+                mainCanvas.itemconfig(LABEL_1_4, text="")
+        elif mainCanvas.itemcget(LABEL_1_2, "text") != "" and mainCanvas.itemcget(LABEL_1_3, "text") != "" and mainCanvas.itemcget(LABEL_1_4, "text") == "": # ...et que les case 1_2 et 1_3 ne sont pas vides...
+            if mainCanvas.itemcget(LABEL_1_1, "text") == mainCanvas.itemcget(LABEL_1_2, "text"): # Si les cases 1_1 et 1_2 sont les mêmes, mettre la case 1_1 au double, décaler la case 1_3 à la case 1_2 et mettre la case 1_3 à 0
+                mainCanvas.itemconfig(LABEL_1_1, text=str(int(mainCanvas.itemcget(LABEL_1_1, "text"))+int(mainCanvas.itemcget(LABEL_1_2, "text"))))
+                mainCanvas.itemconfig(LABEL_1_3, text="")
+                mainCanvas.itemconfig(LABEL_1_2, text=str(int(mainCanvas.itemcget(LABEL_1_3, "text"))))
+            elif mainCanvas.itemcget(LABEL_1_2, "text") == mainCanvas.itemcget(LABEL_1_3, "text"): # Si les cases 1_2 et 1_3 sont les mêmes, mettre la case 1_2 au double et mettre la case 1_3 à 0
+                mainCanvas.itemconfig(LABEL_1_2, text=str(int(mainCanvas.itemcget(LABEL_1_2, "text"))+int(mainCanvas.itemcget(LABEL_1_3, "text"))))
+                mainCanvas.itemconfig(LABEL_1_3, text="")
+            else: # Si elles sont toutes différentes
+                pass
+        elif mainCanvas.itemcget(LABEL_1_2, "text") == "" and mainCanvas.itemcget(LABEL_1_3, "text") != "" and mainCanvas.itemcget(LABEL_1_4, "text") != "": # ...et que les case 1_3 et 1_4 ne sont pas vides...
+            if mainCanvas.itemcget(LABEL_1_1, "text") == mainCanvas.itemcget(LABEL_1_3, "text"): # Si les cases 1_1 et 1_3 sont les mêmes, mettre la case 1_1 au double, décaler la case 1_4 à la case 1_2 et mettre la case 1_4 à 0
+                mainCanvas.itemconfig(LABEL_1_1, text=str(int(mainCanvas.itemcget(LABEL_1_1, "text"))+int(mainCanvas.itemcget(LABEL_1_3, "text"))))
+                mainCanvas.itemconfig(LABEL_1_4, text="")
+                mainCanvas.itemconfig(LABEL_1_2, text=str(int(mainCanvas.itemcget(LABEL_1_4, "text"))))
+            elif mainCanvas.itemcget(LABEL_1_3, "text") == mainCanvas.itemcget(LABEL_1_4, "text"): # Si les cases 1_3 et 1_4 sont les mêmes, mettre la case 1_2 au double et mettre la case 1_3 à 0
+                mainCanvas.itemconfig(LABEL_1_2, text=str(int(mainCanvas.itemcget(LABEL_1_3, "text"))+int(mainCanvas.itemcget(LABEL_1_4, "text"))))
+                mainCanvas.itemconfig(LABEL_1_3, text="")
+                mainCanvas.itemconfig(LABEL_1_4, text="")
+            else: # Si elles sont toutes différentes, décaler chaque case vers la gauche
+                mainCanvas.itemconfig(LABEL_1_2, text=str(int(mainCanvas.itemcget(LABEL_1_3, "text"))))
+                mainCanvas.itemconfig(LABEL_1_3, text=str(int(mainCanvas.itemcget(LABEL_1_4, "text"))))
+        elif mainCanvas.itemcget(LABEL_1_2, "text") != "" and mainCanvas.itemcget(LABEL_1_3, "text") == "" and mainCanvas.itemcget(LABEL_1_4, "text") != "": # ...et que les case 1_2 et 1_4 ne sont pas vides...
+            if mainCanvas.itemcget(LABEL_1_1, "text") == mainCanvas.itemcget(LABEL_1_2, "text"): # Si les cases 1_1 et 1_2 sont les mêmes, mettre la case 1_1 au double, décaler la case 1_4 à la case 1_2 et mettre la case 1_4 à 0
+                mainCanvas.itemconfig(LABEL_1_1, text=str(int(mainCanvas.itemcget(LABEL_1_1, "text"))+int(mainCanvas.itemcget(LABEL_1_2, "text"))))
+                mainCanvas.itemconfig(LABEL_1_4, text="")
+                mainCanvas.itemconfig(LABEL_1_2, text=str(int(mainCanvas.itemcget(LABEL_1_4, "text"))))
+            elif mainCanvas.itemcget(LABEL_1_3, "text") == mainCanvas.itemcget(LABEL_1_4, "text"): # Si les cases 1_2 et 1_4 sont les mêmes, mettre la case 1_2 au double et mettre la case 1_3 à 0
+                mainCanvas.itemconfig(LABEL_1_2, text=str(int(mainCanvas.itemcget(LABEL_1_2, "text"))+int(mainCanvas.itemcget(LABEL_1_4, "text"))))
+                mainCanvas.itemconfig(LABEL_1_4, text="")
+            else: # Si elles sont toutes différentes, décaler chaque case vers la gauche
+                mainCanvas.itemconfig(LABEL_1_3, text=str(int(mainCanvas.itemcget(LABEL_1_4, "text"))))
+        elif mainCanvas.itemcget(LABEL_1_2, "text") != "" and mainCanvas.itemcget(LABEL_1_3, "text") != "" and mainCanvas.itemcget(LABEL_1_4, "text") != "": # ...et que les case 1_2 ; 1_3 et 1_4 ne sont pas vides...
+            if mainCanvas.itemcget(LABEL_1_1, "text") == mainCanvas.itemcget(LABEL_1_2, "text"): # Si les cases 1_1 et 1_2 sont les mêmes, mettre la case 1_1 au double...
+                mainCanvas.itemconfig(LABEL_1_1, text=str(int(mainCanvas.itemcget(LABEL_1_1, "text"))+int(mainCanvas.itemcget(LABEL_1_2, "text"))))
+                if mainCanvas.itemcget(LABEL_1_3, "text") == mainCanvas.itemcget(LABEL_1_4, "text"): # ... et si les cases 1_3 et 1_4 sont les mêmes, mettre la case 1_1 au double et mettre 1_3 et 1_4 à 0
+                    mainCanvas.itemconfig(LABEL_1_2, text=str(int(mainCanvas.itemcget(LABEL_1_3, "text"))+int(mainCanvas.itemcget(LABEL_1_4, "text"))))
+                    mainCanvas.itemconfig(LABEL_1_3, text="")
+                    mainCanvas.itemconfig(LABEL_1_4, text="")
+                else:
+                    mainCanvas.itemconfig(LABEL_1_2, text=str(int(mainCanvas.itemcget(LABEL_1_3, "text"))))
+                    mainCanvas.itemconfig(LABEL_1_3, text=str(int(mainCanvas.itemcget(LABEL_1_4, "text"))))
+                    mainCanvas.itemconfig(LABEL_1_4, text="")
+            else:
+                if mainCanvas.itemcget(LABEL_1_3, "text") == mainCanvas.itemcget(LABEL_1_4, "text"): # ... et si les cases 1_3 et 1_4 sont les mêmes, mettre la case 1_1 au double et mettre 1_3 et 1_4 à 0
+                    mainCanvas.itemconfig(LABEL_1_3, text=str(int(mainCanvas.itemcget(LABEL_1_3, "text"))+int(mainCanvas.itemcget(LABEL_1_4, "text"))))
+                    mainCanvas.itemconfig(LABEL_1_4, text="")
+                else:
+                    pass
         
         
-            
-
 
 
 def up():
@@ -160,58 +210,58 @@ right_button = tk.Button(root, text="RIGHT", height=5, width=10, command=right)
 #Ligne 1
 
 CASE_1_1 =  mainCanvas.create_rectangle(LARGEUR-475, HAUTEUR-475, LARGEUR-365, HAUTEUR-365, fill=colors[0])
-LABEL_1_1 = mainCanvas.create_text((80, 80),text="")
+LABEL_1_1 = mainCanvas.create_text((80, 80),text="", fill="black")
 
 CASE_1_2 = mainCanvas.create_rectangle(LARGEUR-360, HAUTEUR-475, LARGEUR-250, HAUTEUR-365, fill=colors[0])
-LABEL_1_2 = mainCanvas.create_text((195, 80),text="")
+LABEL_1_2 = mainCanvas.create_text((195, 80),text="", fill="black")
 
 CASE_1_3 = mainCanvas.create_rectangle(LARGEUR-245, HAUTEUR-475, LARGEUR-135, HAUTEUR-365, fill=colors[0])
-LABEL_1_3 = mainCanvas.create_text((310, 80),text="")
+LABEL_1_3 = mainCanvas.create_text((310, 80),text="", fill="black")
 
 CASE_1_4 = mainCanvas.create_rectangle(LARGEUR-130, HAUTEUR-475, LARGEUR-20, HAUTEUR-365, fill=colors[0])
-LABEL_1_4 = mainCanvas.create_text((425, 80),text="")
+LABEL_1_4 = mainCanvas.create_text((425, 80),text="", fill="black")
 
 #Ligne 2
 
 CASE_2_1 = mainCanvas.create_rectangle(LARGEUR-475, HAUTEUR-360, LARGEUR-365, HAUTEUR-250, fill=colors[0])
-LABEL_2_1 = mainCanvas.create_text((80, 195),text="")
+LABEL_2_1 = mainCanvas.create_text((80, 195),text="", fill="black")
 
 CASE_2_2 = mainCanvas.create_rectangle(LARGEUR-360, HAUTEUR-360, LARGEUR-250, HAUTEUR-250, fill=colors[0])
-LABEL_2_2 = mainCanvas.create_text((195, 195),text="")
+LABEL_2_2 = mainCanvas.create_text((195, 195),text="", fill="black")
 
 CASE_2_3 = mainCanvas.create_rectangle(LARGEUR-245, HAUTEUR-360, LARGEUR-135, HAUTEUR-250, fill=colors[0])
-LABEL_2_3 = mainCanvas.create_text((310, 195),text="")
+LABEL_2_3 = mainCanvas.create_text((310, 195),text="", fill="black")
 
 CASE_2_4 = mainCanvas.create_rectangle(LARGEUR-130, HAUTEUR-360, LARGEUR-20, HAUTEUR-250, fill=colors[0])
-LABEL_2_4 = mainCanvas.create_text((425, 195),text="")
+LABEL_2_4 = mainCanvas.create_text((425, 195),text="", fill="black")
 
 #Ligne 3
 
 CASE_3_1 = mainCanvas.create_rectangle(LARGEUR-475, HAUTEUR-245, LARGEUR-365, HAUTEUR-135, fill=colors[0])
-LABEL_3_1 = mainCanvas.create_text((80, 310),text="")
+LABEL_3_1 = mainCanvas.create_text((80, 310),text="", fill="black")
 
 CASE_3_2 = mainCanvas.create_rectangle(LARGEUR-360, HAUTEUR-245, LARGEUR-250, HAUTEUR-135, fill=colors[0])
-LABEL_3_2 = mainCanvas.create_text((195, 310),text="")
+LABEL_3_2 = mainCanvas.create_text((195, 310),text="", fill="black")
 
 CASE_3_3 = mainCanvas.create_rectangle(LARGEUR-245, HAUTEUR-245, LARGEUR-135, HAUTEUR-135, fill=colors[0])
-LABEL_3_3 = mainCanvas.create_text((310, 310),text="")
+LABEL_3_3 = mainCanvas.create_text((310, 310),text="", fill="black")
 
 CASE_3_4 = mainCanvas.create_rectangle(LARGEUR-130, HAUTEUR-245, LARGEUR-20, HAUTEUR-135, fill=colors[0])
-LABEL_3_4 = mainCanvas.create_text((425, 310),text="")
+LABEL_3_4 = mainCanvas.create_text((425, 310),text="", fill="black")
 
 #Ligne 4
 
 CASE_4_1 = mainCanvas.create_rectangle(LARGEUR-475, HAUTEUR-130, LARGEUR-365, HAUTEUR-20, fill=colors[0])
-LABEL_4_1 = mainCanvas.create_text((80, 425),text="")
+LABEL_4_1 = mainCanvas.create_text((80, 425),text="", fill="black")
 
 CASE_4_2 = mainCanvas.create_rectangle(LARGEUR-360, HAUTEUR-130, LARGEUR-250, HAUTEUR-20, fill=colors[0])
-LABEL_4_2 = mainCanvas.create_text((195, 425),text="")
+LABEL_4_2 = mainCanvas.create_text((195, 425),text="", fill="black")
 
 CASE_4_3 = mainCanvas.create_rectangle(LARGEUR-245, HAUTEUR-130, LARGEUR-135, HAUTEUR-20, fill=colors[0])
-LABEL_4_3 = mainCanvas.create_text((310, 425),text="")
+LABEL_4_3 = mainCanvas.create_text((310, 425),text="", fill="black")
 
 CASE_4_4 = mainCanvas.create_rectangle(LARGEUR-130, HAUTEUR-130, LARGEUR-20, HAUTEUR-20, fill=colors[0])
-LABEL_4_4 = mainCanvas.create_text((425, 425),text="")
+LABEL_4_4 = mainCanvas.create_text((425, 425),text="", fill="black")
 
 
 mainCanvas.grid(column=0, columnspan=4, row=0)
