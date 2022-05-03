@@ -20,7 +20,22 @@ colors = ["white","yellow","green","brown","purple","pink","grey","orange","blue
 
 # Fonctions
 
+def new_case():
+    new1 = random.choice([2,4])
+    new_case_1_1 = random.randint(0,3)
+    new_case_1_2 = random.randint(0,3)
+
+    while matrice[new_case_1_1][new_case_1_2] != 0:
+        new_case_1_1 = random.randint(0,3)
+        new_case_1_2 = random.randint(0,3)
+
+    matrice[new_case_1_1][new_case_1_2] = new1
+
 def start():
+
+    for i in range (0,4):
+        for j in range (0,4):
+            matrice[i][j] = 0
 
     case_1_1 = random.randint(0,3)
     case_1_2 = random.randint(0,3)
@@ -52,6 +67,171 @@ def save():
 
 def left():
 
+    for i in range (0,4):
+        if matrice[i][0] == 0: # Si la case 1 est vide...
+            if matrice[i][1] == 0: # ...et que la case 2 est vide...
+                if matrice[i][2] == 0: # ...et que la case 3 est vide...
+                    if matrice[i][3] == 0: # ...et que la case 4 est vide :
+                        pass # ne rien faire
+                    else: # ...et que la case 4 n'est pas vide :
+                        matrice[i][0] = matrice[i][3] # déplacer sa valeur à la case 1
+                        matrice[i][3] = 0 # puis mettre la case 4 à 0
+                else: # ...et que la case 3 n'est pas vide :
+                    if matrice[i][3] == 0: # Si la case 4 est vide :
+                        matrice[i][0] = matrice[i][2] # déplacer sa valeur à la case 1
+                        matrice[i][2] = 0 # puis mettre la case 3 à 0
+                    else: # Si la case 4 n'est pas vide :
+                        if matrice[i][2] == matrice[i][3]: # Si les cases 3 et 4 sont les mêmes :
+                            matrice[i][0] = matrice[i][2] + matrice[i][3] # Ajoutez leur valeur et la mettre à la case 1
+                            matrice[i][2] = 0 # Puis mettre la case 3 à 0
+                            matrice[i][3] = 0 # Et la case 4 à 0 églement
+                        else: # Si les cases 3 et 4 ne sont pas les mêmes :
+                            matrice[i][0] = matrice[i][2] # Déplacer la valeur de la case 3 à la case 1
+                            matrice[i][1] = matrice[i][3] # Déplacer la valeur de la case 4 à la case 2
+                            matrice[i][2] = 0 # Puis mettre la case 3 à 0
+                            matrice[i][3] = 0 # Et la case 4 à 0 également
+            else: # ...et que la case 2 n'est pas vide :
+                if matrice[i][2] == 0: # Si la case 3 est vide...
+                    if matrice[i][3] == 0: #...et si la case 4 est vide :
+                        matrice[i][0] = matrice[i][1] # Déplacer sa valeur à la case 1
+                        matrice[i][1] = 0 # Puis mettre la case 1 à 0
+                    else: # ...et que la case 4 n'est pas vide :
+                        if matrice[i][1] == matrice[i][3]: # Si les cases 2 et 4 sont les mêmes
+                            matrice[i][0] = matrice[i][1] + matrice[i][3] # Ajoutez leur valeur et la mettre à la case 1
+                            matrice[i][1] = 0 # Puis mettre la case 2 à 0
+                            matrice[i][3] = 0 # Et la case 4 à 0 églement
+                        else: # Si les cases 2 et 4 ne sont pas les mêmes :
+                            matrice[i][0] = matrice[i][1] # Déplacer la valeur de la case 2 à la case 1
+                            matrice[i][1] = matrice[i][3] # Déplacer la valeur de la case 4 à la case 2
+                            matrice[i][3] = 0 # Puis mettre la case 4 à 0
+                else: # Si la case 3 n'est pas vide
+                    if matrice[i][3] == 0: #...et si la case 4 est vide :
+                        if matrice[i][1] == matrice[i][2]: # Si les cases 2 et 3 sont les mêmes
+                            matrice[i][0] = matrice[i][1] + matrice[i][2] # Ajoutez leur valeur et la mettre à la case 1
+                            matrice[i][1] = 0 # Puis mettre la case 2 à 0
+                            matrice[i][2] = 0 # Et la case 3 à 0 églement
+                        else: # Si les cases 2 et 3 ne sont pas les mêmes :
+                            matrice[i][0] = matrice[i][1] # Déplacer la valeur de la case 2 à la case 1
+                            matrice[i][1] = matrice[i][2] # Déplacer la valeur de la case 4 à la case 2
+                            matrice[i][2] = 0 # Puis mettre la case 4 à 0
+                    else: # ...et que la case 4 n'est pas vide :
+                        if matrice[i][1] == matrice[i][2]: # Si les cases 2 et 3 sont les mêmes
+                            matrice[i][0] = matrice[i][1] + matrice[i][2] # Ajoutez leur valeur et la mettre à la case 1
+                            matrice[i][1] = matrice[i][3] # Puis déplacer la valeur de la case 4 à la case 2
+                            matrice[i][2] = 0 # Et mettre la case 3 à 0
+                            matrice[i][3] = 0 # Ainsi que la case 4
+                        else: # Si les cases 2 et 3 ne sont pas les mêmes
+                            if matrice[i][2] == matrice[i][3]: # Si les cases 3 et 4 sont les mêmes
+                                matrice[i][0] = matrice[i][1] # Puis déplacer la valeur de la case 4 à la case 2
+                                matrice[i][1] = matrice[i][2] + matrice[i][3] # Ajoutez leur valeur et la mettre à la case 1
+                                matrice[i][2] = 0 # Et mettre la case 3 à 0
+                                matrice[i][3] = 0 # Ainsi que la case 4
+                            else: # Si aucune case n'est pareille
+                                matrice[i][0] = matrice[i][1]
+                                matrice[i][1] = matrice[i][2]
+                                matrice[i][2] = matrice[i][3]
+                                matrice[i][3] = 0
+        else: # Si la case 1 n'est pas vide...
+            if matrice[i][1] == 0: #... et que la case 2 est vide...
+                if matrice[i][2] == 0: #... et que la case 3 est vide...
+                    if matrice[i][3] == 0: #... et que la case 4 est vide...
+                        pass # ne rien faire
+                    else: # ...et que la case 4 n'est pas vide :
+                        if matrice[i][0] == matrice[i][3]: # Si les cases 1 et 4 sont les mêmes :
+                            matrice[i][0] = matrice[i][0] + matrice[i][3] # Mettre la valeur de la case 1 au double
+                            matrice[i][3] = 0 # Puis mettre la case 4 à 0
+                        else: # Si les cases 1 et 4 ne sont pas les mêmes :
+                            matrice[i][1] = matrice[i][3] # Déplacer la case 4 à la case 2
+                            matrice[i][3] = 0 # Mettre la case 4 à 0
+                else: # ...et que la case 3 n'est pas vide :
+                    if matrice[i][3] == 0: # Si la case 4 est vide :
+                        if matrice[i][0] == matrice[i][2]: # Si les case 1 et 3 sont les mêmes
+                            matrice[i][0] = matrice[i][0] + matrice[i][2]
+                            matrice[i][2] = 0
+                        else: # Si les cases 1 et 3 ne sont pas les mêmes :
+                            matrice[i][1] = matrice[i][2] # Déplacer la case 3 à la case 2
+                            matrice[i][2] = 0 # Mettre la case 3 à 0
+                    else: # Si la case 4 n'est pas vide
+                        if matrice[i][0] == matrice[i][2]: # Si les case 1 et 3 sont les mêmes
+                            matrice[i][0] = matrice[i][0] + matrice[i][2] # Mettre la case 1 au double
+                            matrice[i][1] = matrice[i][3] # Déplacer la valeur de la case 4 à la case 2
+                            matrice[i][2] = 0 # Mettre la case 3 à 0
+                            matrice[i][3] = 0 # Mettre la case 4 à 0
+                        else: # Si les cases 1 et 3 ne sont pas les mêmes
+                            if matrice[i][2] == matrice[i][3]: # Si les case 3 et 4 sont les mêmes
+                                matrice[i][1] = matrice[i][2] + matrice[i][3] # Mettre la somme des deux à la case 1
+                                matrice[i][2] = 0 # Mettre la case 3 à 0
+                                matrice[i][3] = 0 # Mettre la case 4 à 0
+                            else: # Si aucune case consécutive n'est pareille
+                                matrice[i][1] = matrice[i][2] # Déplacer la valeur de la case 3 à la case 2
+                                matrice[i][2] = matrice[i][3] # Déplacer la valeur de la case 4 à la case 3
+                                matrice[i][3] = 0 # Mettre la case 4 à 0
+            else: # ...et que la case 2 n'est pas vide :
+                if matrice[i][2] == 0: # Si la case 3 est vide :
+                    if matrice[i][3] == 0: # Si la case 4 est vide :
+                        if matrice[i][0] == matrice[i][1]: # Si les cases 1 et 2 sont les mêmes
+                            matrice[i][0] = matrice[i][0] + matrice[i][1] # Mettre au double la valeur de la case 1
+                            matrice[i][1] = 0 # Mettre la case 2 à 0
+                        else: # Si les cases 1 et 2 ne sont pas les mêmes
+                            pass # Ne rien faire
+                    else: # Si la case 4 n'est pas vide
+                        if matrice[i][0] == matrice[i][1]: # Si les cases 1 et 2 sont les mêmes
+                            matrice[i][0] = matrice[i][0] + matrice[i][1]
+                            matrice[i][1] = matrice[i][3]
+                            matrice[i][3] = 0
+                        else: # Si les cases 1 et 2 ne sont pas les mêmes
+                            if matrice[i][1] == matrice[i][3]: # Si les cases 1 et 4 sont les mêmes
+                                matrice[i][1] = matrice[i][1] + matrice[i][3]
+                                matrice[i][3] = 0
+                            else: # Si les cases 1 et 4 ne sont pas les mêmes
+                                matrice[i][2] = matrice[i][3]
+                                matrice[i][3] = 0
+                else: # Si la case 3 n'est pas vide
+                    if matrice[i][3] == 0: # Si la case 4 est vide
+                        if matrice[i][0] == matrice[i][1]: # Si les cases 1 et 2 sont les mêmes
+                            matrice[i][0] = matrice[i][0] + matrice[i][1]
+                            matrice[i][1] = matrice[i][2]
+                            matrice[i][2] = 0
+                        else: # Si les cases 1 et 2 ne sont pas les mêmes
+                            if matrice[i][1] == matrice[i][2]:
+                                matrice[i][1] = matrice[i][1] + matrice[i][2]
+                                matrice[i][2] = 0
+                    else: # Si la case 4 n'est pas vide
+                        if matrice[i][2] == 0: # Si la case 3 est vide :
+                            if matrice[i][0] == matrice[i][1]: # Si les cases 1 et 2 sont les mêmes
+                                matrice[i][0] = matrice[i][0] + matrice[i][1]
+                                matrice[i][1] = matrice[i][3]
+                                matrice[i][3] = 0
+                            else: # Si les cases 1 et 2 ne sont pas les mêmes
+                                if matrice[i][1] == matrice[i][3]: # Si les cases 1 et 4 sont les mêmes
+                                    matrice[i][1] = matrice[i][1] + matrice[i][3]
+                                    matrice[i][3] = 0
+                                else: # Si les cases 1 et 4 ne sont pas les mêmes
+                                    matrice[i][2] = matrice[i][3]
+                        else: # Si la case 3 n'est pas vide
+                            if matrice[i][0] == matrice[i][1]: # Si les cases 1 et 2 sont les mêmes
+                                if matrice[i][2] == matrice[i][3]: # Si les cases 1 et 4 sont les mêmes
+                                    matrice[i][0] = matrice[i][0] + matrice[i][1]
+                                    matrice[i][1] = matrice[i][2] + matrice[i][3]
+                                    matrice[i][2] = 0
+                                    matrice[i][3] = 0
+                                else: # Si les cases 1 et 4 ne sont pas les mêmes
+                                    matrice[i][0] = matrice[i][0] + matrice[i][1]
+                                    matrice[i][1] = matrice[i][2]
+                                    matrice[i][2] = matrice[i][3]
+                            else: # Si les cases 1 et 2 ne sont pas les mêmes
+                                if matrice[i][2] == matrice[i][3]: # Si les cases 3 et 4 sont les mêmes
+                                    matrice[i][2] = matrice[i][2] + matrice[i][3]
+                                    matrice[i][3] = 0
+                                else: # Si les cases 3 et 4 ne sont pas les mêmes
+                                    if matrice[i][1] == matrice[i][2]: # Si les cases 2 et 3 sont les mêmes
+                                        matrice[i][1] = matrice[i][1] + matrice[i][2]
+                                        matrice[i][2] = matrice[i][3]
+                                        matrice[i][3] = 0
+                                    else: # Si les cases 2 et 3 ne sont pas les mêmes
+                                        pass
+
+    new_case()
     affichage()
     return matrice
 
@@ -131,7 +311,7 @@ up_button = tk.Button(root, text="UP", height=2, width=20, command=up)
 down_button = tk.Button(root, text="DOWN", height=2, width=20, command=down)
 right_button = tk.Button(root, text="RIGHT", height=5, width=10, command=right)
 
-# Création des cases (CASE_LIGNE_COLONNE)
+# Création des cases (CASE_LIGNE_COLONNE) et des chiffres qui vont avec (de bases aucun texte puisqu'il n'y a pas de cases)
 
 #Ligne 1
 
@@ -202,5 +382,5 @@ up_button.grid(column=1, row=3, columnspan=2)
 down_button.grid(column=1, row=4, columnspan=2)
 right_button.grid(column=3, row=3, rowspan=2)
 
-
+affichage()
 root.mainloop()
