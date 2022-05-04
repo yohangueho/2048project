@@ -12,7 +12,7 @@ from tkinter.messagebox import showinfo
 LARGEUR = 500
 HAUTEUR = 500
 
-matrice = [[2,4,8,16],[4,8,16,2],[8,4096,2,4],[16,2,4,2048]]
+matrice = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
 
 numbers = [0,2,4,8,16,32,64,128,256,512,1024,2048, 4096]
 numbers_text = ["","2","4","8","16","32","64","128","256","512","1024","2048", "4096"]
@@ -343,7 +343,7 @@ def end():
 
     for i in range (0,4):
         for j in range (0,4):
-            total += matrice[i][j]
+            total += matrice[i][j] # LE TOTAL DE POINTS DANS CETTE VARIABLE
     
     if end == 8:
         END = 0
@@ -412,7 +412,6 @@ def affichage():
     mainCanvas.itemconfig(LABEL_4_3, text=number[14])
     mainCanvas.itemconfig(LABEL_4_4, text=number[15])
 
-    print(number, color)
     return number, color
 
 # Widgets
