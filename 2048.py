@@ -67,6 +67,17 @@ def save():
 
 def left():
 
+    res = 0
+    for i in range (0,4):
+        if (matrice[i][0] == 0 and matrice[i][1] == 0 and matrice[i][2] == 0 and matrice[i][3] == 0) or \
+            (matrice[i][0] != 0 and matrice[i][0] != matrice[i][1] and matrice[i][1] != matrice[i][2] and matrice[i][2] != matrice[i][3] \
+                and matrice[i][1] != 0) or \
+            (matrice[i][0] != 0 and matrice[i][1] == 0 and matrice[i][2] == 0 and matrice[i][3] == 0) or \
+            (matrice[i][0] != 0 and matrice[i][1] != 0 and matrice[i][0] != matrice[i][1] and matrice[i][3] == 0 and matrice[i][2] == 0) :
+            res += 1
+        else:
+            pass
+
     for i in range (0,4):
         if matrice[i][0] == 0: # Si la case 1 est vide...
             if matrice[i][1] == 0: # ...et que la case 2 est vide...
@@ -231,7 +242,12 @@ def left():
                                     else: # Si les cases 2 et 3 ne sont pas les mêmes
                                         pass
 
-    new_case()
+    
+    if res != 4:
+        new_case()
+    else:
+        pass 
+    
     affichage()
     return matrice
 
