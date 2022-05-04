@@ -17,7 +17,6 @@ numbers = [0,2,4,8,16,32,64,128,256,512,1024,2048]
 numbers_text = ["","2","4","8","16","32","64","128","256","512","1024","2048"]
 colors = ["white","yellow","green","brown","purple","pink","grey","orange","blue","skyblue2","skyblue3","cyan"]
 
-
 # Fonctions
 
 def new_case():
@@ -65,7 +64,7 @@ def load():
 def save():
     return
 
-def left():
+def deplacement():
 
     res = 0
     for i in range (0,4):
@@ -247,18 +246,75 @@ def left():
         new_case()
     else:
         pass 
-    
+
+def left():
+    deplacement()
     affichage()
     return matrice
 
+
 def up():
-    return
+    MU = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+    for i in range (0,4):
+        for j in range (0,4):
+            MU[i][j] = matrice[j][3-i]
+    for i in range (0,4):
+        for j in range (0,4):
+            matrice[i][j] = MU[i][j]
+
+    deplacement()
+
+    for i in range (0,4):
+        for j in range (0,4):
+            MU[i][j] = matrice[3-j][i]
+    for i in range (0,4):
+        for j in range (0,4):
+            matrice[i][j] = MU[i][j]
+
+    affichage()
+    return matrice
 
 def down():
-    return
+    MU = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+    for i in range (0,4):
+        for j in range (0,4):
+            MU[i][j] = matrice[3-j][i]
+    for i in range (0,4):
+        for j in range (0,4):
+            matrice[i][j] = MU[i][j]
+
+    deplacement()
+
+    for i in range (0,4):
+        for j in range (0,4):
+            MU[i][j] = matrice[j][3-i]
+    for i in range (0,4):
+        for j in range (0,4):
+            matrice[i][j] = MU[i][j]
+
+    affichage()
+    return matrice
 
 def right():
-    return
+    MU = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+    for i in range (0,4):
+        for j in range (0,4):
+            MU[i][j] = matrice[3-i][3-j]
+    for i in range (0,4):
+        for j in range (0,4):
+            matrice[i][j] = MU[i][j]
+
+    deplacement()
+
+    for i in range (0,4):
+        for j in range (0,4):
+            MU[i][j] = matrice[3-i][3-j]
+    for i in range (0,4):
+        for j in range (0,4):
+            matrice[i][j] = MU[i][j]
+
+    affichage()
+    return matrice
 
 # Programme principal
 
