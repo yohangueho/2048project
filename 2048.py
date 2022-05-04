@@ -14,6 +14,8 @@ HAUTEUR = 500
 
 matrice = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
 
+k = 0
+
 numbers = [0,2,4,8,16,32,64,128,256,512,1024,2048, 4096]
 numbers_text = ["","2","4","8","16","32","64","128","256","512","1024","2048", "4096"]
 colors = ["white","yellow","green","brown","purple","pink","grey","orange","blue","skyblue2","skyblue3","cyan","orange"]
@@ -67,16 +69,20 @@ def save():
 
 def deplacement():
 
+    global k
+
     res = 0
     for i in range (0,4):
         if (matrice[i][0] == 0 and matrice[i][1] == 0 and matrice[i][2] == 0 and matrice[i][3] == 0) or \
-            (matrice[i][0] != 0 and matrice[i][0] != matrice[i][1] and matrice[i][1] != matrice[i][2] and matrice[i][2] != matrice[i][3] \
-                and matrice[i][1] != 0) or \
             (matrice[i][0] != 0 and matrice[i][1] == 0 and matrice[i][2] == 0 and matrice[i][3] == 0) or \
-            (matrice[i][0] != 0 and matrice[i][1] != 0 and matrice[i][0] != matrice[i][1] and matrice[i][3] == 0 and matrice[i][2] == 0) :
+            (matrice[i][0] != 0 and matrice[i][1] != 0 and matrice[i][0] != matrice[i][1] and matrice[i][2] == 0 and matrice[i][3] == 0) or \
+            (matrice[i][0] != 0 and matrice[i][1] != 0 and matrice[i][2] != 0 and matrice[i][0] != matrice[i][1] and matrice[i][1] != matrice[i][2] and matrice[i][3] == 0) or \
+            (matrice[i][0] != 0 and matrice[i][1] != 0 and matrice[i][2] != 0 and matrice[i][3] != 0 and matrice[i][0] != matrice[i][1] and matrice[i][1] != matrice[i][2] and matrice[i][2] != matrice[i][3]) :
             res += 1
         else:
             pass
+
+    print(res)
 
     for i in range (0,4):
         if matrice[i][0] == 0: # Si la case 1 est vide...
@@ -245,7 +251,6 @@ def deplacement():
     
     if res != 4:
         new_case()
-        print(1)
     else:
         pass
 
@@ -359,10 +364,10 @@ def end():
                     else:
                         pass
 
-    if END == 0:
-        showinfo("The end", "Jeu terminé ! Dommage... Mais vous avez obtenu"+" "+str(total)+" "+"points !")
-    else:
-        showinfo("The end", "Jeu terminé ! Bravo ! Vous avez atteint"+" "+str(higher)+" "+"et obtenu"+" "+str(total)+" "+"points !")
+        if END == 0:
+            showinfo("The end", "Jeu terminé ! Dommage... Mais vous avez obtenu"+" "+str(total)+" "+"points !")
+        else:
+            showinfo("The end", "Jeu terminé ! Bravo ! Vous avez atteint"+" "+str(higher)+" "+"et obtenu"+" "+str(total)+" "+"points !")
 
 # Programme principal
 
