@@ -5,17 +5,18 @@
 
 import tkinter as tk
 import random
+from tkinter.messagebox import showinfo
 
 # Constantes et variables
 
 LARGEUR = 500
 HAUTEUR = 500
 
-matrice = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+matrice = [[2,4,8,16],[4,8,16,2],[8,4096,2,4],[16,2,4,2048]]
 
-numbers = [0,2,4,8,16,32,64,128,256,512,1024,2048]
-numbers_text = ["","2","4","8","16","32","64","128","256","512","1024","2048"]
-colors = ["white","yellow","green","brown","purple","pink","grey","orange","blue","skyblue2","skyblue3","cyan"]
+numbers = [0,2,4,8,16,32,64,128,256,512,1024,2048, 4096]
+numbers_text = ["","2","4","8","16","32","64","128","256","512","1024","2048", "4096"]
+colors = ["white","yellow","green","brown","purple","pink","grey","orange","blue","skyblue2","skyblue3","cyan","orange"]
 
 # Fonctions
 
@@ -229,6 +230,7 @@ def deplacement():
                                     matrice[i][0] = matrice[i][0] + matrice[i][1]
                                     matrice[i][1] = matrice[i][2]
                                     matrice[i][2] = matrice[i][3]
+                                    matrice[i][3] = 0
                             else: # Si les cases 1 et 2 ne sont pas les mêmes
                                 if matrice[i][2] == matrice[i][3]: # Si les cases 3 et 4 sont les mêmes
                                     matrice[i][2] = matrice[i][2] + matrice[i][3]
@@ -240,16 +242,18 @@ def deplacement():
                                         matrice[i][3] = 0
                                     else: # Si les cases 2 et 3 ne sont pas les mêmes
                                         pass
-
     
     if res != 4:
         new_case()
+        print(1)
     else:
-        pass 
+        pass
 
 def left():
+
     deplacement()
     affichage()
+    end()
     return matrice
 
 
@@ -272,6 +276,7 @@ def up():
             matrice[i][j] = MU[i][j]
 
     affichage()
+    end()
     return matrice
 
 def down():
@@ -293,6 +298,7 @@ def down():
             matrice[i][j] = MU[i][j]
 
     affichage()
+    end()
     return matrice
 
 def right():
@@ -314,7 +320,49 @@ def right():
             matrice[i][j] = MU[i][j]
 
     affichage()
+    end()
     return matrice
+
+def end():
+    end = 0
+    total = 0
+    for i in range (0,4):
+        if (matrice[i][0] != matrice[i][1] and matrice[i][0] != 0 and matrice[i][1] != 0) and \
+            (matrice[i][1] != matrice[i][2] and matrice[i][1] != 0 and matrice[i][2] != 0) and \
+            (matrice[i][2] != matrice[i][3] and matrice[i][2] != 0 and matrice[i][3] != 0):
+            end += 1
+        else:
+            pass
+    for j in range (0,4):
+        if (matrice[0][j] != matrice[1][j] and matrice[0][j] != 0 and matrice[1][j] != 0) and \
+            (matrice[1][j] != matrice[2][j] and matrice[1][j] != 0 and matrice[2][j] != 0) and \
+            (matrice[2][j] != matrice[3][j] and matrice[2][j] != 0 and matrice[3][j] != 0):
+            end += 1
+        else:
+            pass
+
+    for i in range (0,4):
+        for j in range (0,4):
+            total += matrice[i][j]
+    
+    if end == 8:
+        END = 0
+        higher = 0
+        for i in range (0,4):
+            for j in range (0,4):
+                if matrice[i][j] < 2048:
+                    pass
+                else:
+                    END += 1
+                    if matrice[i][j] > higher:
+                        higher = matrice[i][j]
+                    else:
+                        pass
+
+    if END == 0:
+        showinfo("The end", "Jeu terminé ! Dommage... Mais vous avez obtenu"+" "+str(total)+" "+"points !")
+    else:
+        showinfo("The end", "Jeu terminé ! Bravo ! Vous avez atteint"+" "+str(higher)+" "+"et obtenu"+" "+str(total)+" "+"points !")
 
 # Programme principal
 
