@@ -238,13 +238,13 @@ def deplacement():
                                     matrice[i][2] = matrice[i][3]
                                     matrice[i][3] = 0
                             else: # Si les cases 1 et 2 ne sont pas les mêmes
-                                if matrice[i][2] == matrice[i][3]: # Si les cases 3 et 4 sont les mêmes
-                                    matrice[i][2] = matrice[i][2] + matrice[i][3]
-                                    matrice[i][3] = 0
-                                else: # Si les cases 3 et 4 ne sont pas les mêmes
-                                    if matrice[i][1] == matrice[i][2]: # Si les cases 2 et 3 sont les mêmes
+                                if matrice[i][1] == matrice[i][2]: # Si les cases 2 et 3 sont les mêmes
                                         matrice[i][1] = matrice[i][1] + matrice[i][2]
                                         matrice[i][2] = matrice[i][3]
+                                        matrice[i][3] = 0
+                                else: # Si les cases 3 et 4 ne sont pas les mêmes
+                                    if matrice[i][2] == matrice[i][3]: # Si les cases 3 et 4 sont les mêmes
+                                        matrice[i][2] = matrice[i][2] + matrice[i][3]
                                         matrice[i][3] = 0
                                     else: # Si les cases 2 et 3 ne sont pas les mêmes
                                         pass
