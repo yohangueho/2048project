@@ -6,6 +6,7 @@
 import tkinter as tk
 import random
 from tkinter.messagebox import askyesno, showinfo
+from tkinter import simpledialog
 
 # Constantes et variables
 
@@ -84,13 +85,18 @@ def load():
     return
 
 def save():
-    sauvegarde = open("2048_games", 'w')
+    input = ""
+    while input == "":
+        input = simpledialog.askstring(title="Save", prompt="Name of the game ?")
 
-    sauvegarde.write(str(matrice) + "\n")
+    sauvegarde = open("Saved games", 'w')
+    names = open("Names of the games", "w")
 
-    sauvegarde.close()
+    sauvegarde.write(input + " : " + str(matrice) + "\n")
+    sauvegarde.write("\n")
+    names.write(input + "\n")
     
-    showinfo("Sauvegarde", "Votre partie a été enregistrée avec succès dans le dossier de votre code sous le nom '2048_games' !!!")
+    showinfo("Sauvegarde", "Votre partie a été enregistrée avec succès dans le dossier de votre code sous le nom 'Saved games' !")
 
 def deplacement():
 
