@@ -19,7 +19,7 @@ k = 0
 
 numbers = [0,2,4,8,16,32,64,128,256,512,1024,2048, 4096]
 numbers_text = ["","2","4","8","16","32","64","128","256","512","1024","2048", "4096"]
-colors = ["white","yellow","green","brown","purple","pink","grey","orange","blue","skyblue2","skyblue3","cyan","orange"]
+colors = ["white","#eee4da","#ede0c8","#edc850","#edc53f","#f67c5f","#f65e3b","#edcf72","#edcc61","#f2b179","#f2b179","#edc22e","#edc22e","#edc22e"]
 
 # Fonctions
 
