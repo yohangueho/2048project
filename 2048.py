@@ -92,7 +92,7 @@ def save():
     sauvegarde = open("Saved games", "a")
     names = open("Names of the games", "a")
 
-    sauvegarde.write(input + " : " + str(matrice) + '\n')
+    sauvegarde.write(str(matrice) + '\n')
     names.write(input + '\n')
 
     sauvegarde.close()
