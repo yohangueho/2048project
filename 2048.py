@@ -89,12 +89,14 @@ def save():
     while input == "":
         input = simpledialog.askstring(title="Save", prompt="Name of the game ?")
 
-    sauvegarde = open("Saved games", 'w')
-    names = open("Names of the games", "w")
+    sauvegarde = open("Saved games", "a")
+    names = open("Names of the games", "a")
 
-    sauvegarde.write(input + " : " + str(matrice) + "\n")
-    sauvegarde.write("\n")
-    names.write(input + "\n")
+    sauvegarde.write(input + " : " + str(matrice) + '\n')
+    names.write(input + '\n')
+
+    sauvegarde.close()
+    names.close()
     
     showinfo("Sauvegarde", "Votre partie a été enregistrée avec succès dans le dossier de votre code sous le nom 'Saved games' !")
 
