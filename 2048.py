@@ -5,7 +5,7 @@
 
 import tkinter as tk
 import random
-from tkinter.messagebox import showinfo
+from tkinter.messagebox import askyesno, showinfo
 
 # Constantes et variables
 
@@ -59,13 +59,38 @@ def start():
     return matrice
 
 def stop():
-    return
+    
+    sauv = askyesno("Stop", "Vous avez mis fin à votre partie ! Souhaitez-vous la sauvegarder ?", icon = 'question')
+    if sauv == True :
+        save()
+    else :
+        pass
+
+    score = 0
+    for i in range (0,4):
+        for j in range (0,4):
+            score += matrice[i][j] # LE SCORE DANS CETTE VARIABLE
+   
+   
+    showinfo("The end", "Jeu terminé ! Bravo ! Vous avez obtenu"+" "+str(score)+" "+"points !")
+
+    for i in range (0,4):
+        for j in range (0,4):
+            matrice[i][j] = 0 # REINITIALISATION DU PLATEAU
+    
+    affichage()
 
 def load():
     return
 
 def save():
-    return
+    sauvegarde = open("2048_games", 'w')
+
+    sauvegarde.write(str(matrice) + "\n")
+
+    sauvegarde.close()
+    
+    showinfo("Sauvegarde", "Votre partie a été enregistrée avec succès dans le dossier de votre code sous le nom '2048_games' !!!")
 
 def deplacement():
 
