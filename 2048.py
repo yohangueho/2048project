@@ -81,13 +81,39 @@ def stop():
     
     affichage()
 
+    root.destroy()
+
 def load():
-    return
+    global matrice
+    i= int(simpledialog.askstring(title="load", prompt="quelle est le numéro de la partie que vous souhaitez load ?"))
+
+    fichier = open("Saved games", 'r')
+    liste = fichier.readlines()[i-1]
+    ligne = list(liste.strip())
+    liste1 = [int(ligne[2]), int(ligne[5]), int(ligne[8]), int(ligne[11])]
+    liste2 = [int(ligne[16]), int(ligne[19]), int(ligne[22]), int(ligne[25])]
+    liste3 = [int(ligne[30]), int(ligne[33]), int(ligne[36]), int(ligne[39])]
+    liste4 = [int(ligne[44]), int(ligne[47]), int(ligne[50]), int(ligne[53])]
+    matrice = [liste1, liste2, liste3, liste4]
+    affichage()
+    print(liste)
 
 def save():
+    res = 0
     input = ""
+    f_liste = []
+    f = open("Names of the games", 'r')
+    f_liste = f.readlines()
+    input = simpledialog.askstring(title="Save", prompt="Name of the game ?")
+    input = input + '\n'
     while input == "":
-        input = simpledialog.askstring(title="Save", prompt="Name of the game ?")
+        for x in f_liste:
+            if input != x:
+                res += 1
+            else:
+                input = simpledialog.askstring(title="Save", prompt="Name of the game ?")
+                input = input + '\n'
+    input = input - '\n'
 
     sauvegarde = open("Saved games", "a")
     names = open("Names of the games", "a")
