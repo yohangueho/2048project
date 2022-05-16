@@ -81,18 +81,16 @@ def stop():
    
     showinfo("The end", "Jeu terminé ! Bravo ! Vous avez obtenu"+" "+str(score)+" "+"points !")
 
-    for i in range (0,4):
-        for j in range (0,4):
-            matrice[i][j] = 0 # REINITIALISATION DU PLATEAU
-    
-    affichage()
-
     root.destroy()
 
 def load():
     """ Charge la partie que l'utilisateur décide de charger (préalablement enregistrée """
-    global matrice
-    i= int(simpledialog.askstring(title="load", prompt="quelle est le numéro de la partie que vous souhaitez load ?"))
+    global matrice, res
+    i= int(simpledialog.askstring(title="load", prompt="Quelle est le numéro de la partie que vous souhaitez load ?"))
+
+    while i > int(res):
+        showinfo("Erreur", "Cette partie n'existe pas")
+        i = int(simpledialog.askstring(title="load", prompt="Quelle est le numéro de la partie que vous souhaitez load ?"))
 
     fichier = open("Saved games.txt", 'r')
     liste = fichier.readlines()[i-1]
@@ -103,7 +101,6 @@ def load():
     liste4 = [int(ligne[44]), int(ligne[47]), int(ligne[50]), int(ligne[53])]
     matrice = [liste1, liste2, liste3, liste4]
     affichage()
-    print(liste)
 
 def save():
     """ Enregistre la partie, avec comme nom automatique le nombre de parties déjà enregistrées (Si 4 parties enregistrées, nom de celle-ci = 5) """
@@ -122,13 +119,12 @@ def save():
     sauvegarde.close()
     names.close()
     
-    showinfo("Sauvegarde", "Votre partie a été enregistrée avec succès dans le dossier de votre code sous le nom "+str(res)+" !")
+    showinfo("Sauvegarde", "Votre partie a été enregistrée avec succès dans le dossier 'Saved Games' sous le nom "+str(res)+" !")
 
     return res
 
 def deplacement():
     """ Vérifie toutes les conditions afin de déplacer les carrés vers la gauche (fusion de carrés et déplacament dans les cases vides) """
-
 
     global k
 
@@ -322,7 +318,6 @@ def left():
     affichage()
     end()
     return matrice
-
 
 def up():
     """ Rotation de la matrice vers la gauche, puis déplacement, puis rotation de la matrice vers la droite, puis affichage """
