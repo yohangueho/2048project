@@ -17,6 +17,9 @@ matrice = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
 
 k = 0
 
+fichier = open("Names of the games.txt", 'r')
+res = fichier.readlines()[0]
+
 numbers = [0,2,4,8,16,32,64,128,256,512,1024,2048, 4096]
 numbers_text = ["","2","4","8","16","32","64","128","256","512","1024","2048", "4096"]
 colors = ["white","#eee4da","#ede0c8","#edc850","#edc53f","#f67c5f","#f65e3b","#edcf72","#edcc61","#f2b179","#f2b179","#edc22e","#edc22e","#edc22e"]
@@ -24,6 +27,7 @@ colors = ["white","#eee4da","#ede0c8","#edc850","#edc53f","#f67c5f","#f65e3b","#
 # Fonctions
 
 def new_case():
+    """ Choisi une case vide au hasard pour y afficher un nouveau carré avec la valeur 2 ou 4 """
     new1 = random.choice([2,4])
     new_case_1_1 = random.randint(0,3)
     new_case_1_2 = random.randint(0,3)
@@ -35,6 +39,7 @@ def new_case():
     matrice[new_case_1_1][new_case_1_2] = new1
 
 def start():
+    """ Commence la partie en choisissant 2 cases au hasard et y afficher 2 carrés avec les valeurs 2 ou 4 """
 
     for i in range (0,4):
         for j in range (0,4):
@@ -60,6 +65,7 @@ def start():
     return matrice
 
 def stop():
+    """ Demande à l'utilisateur si il veut sauvegarder la partie, la sauvegarde ou non en conséquence, et ferme la fenêtre """
     
     sauv = askyesno("Stop", "Vous avez mis fin à votre partie ! Souhaitez-vous la sauvegarder ?", icon = 'question')
     if sauv == True :
@@ -84,10 +90,11 @@ def stop():
     root.destroy()
 
 def load():
+    """ Charge la partie que l'utilisateur décide de charger (préalablement enregistrée """
     global matrice
     i= int(simpledialog.askstring(title="load", prompt="quelle est le numéro de la partie que vous souhaitez load ?"))
 
-    fichier = open("Saved games", 'r')
+    fichier = open("Saved games.txt", 'r')
     liste = fichier.readlines()[i-1]
     ligne = list(liste.strip())
     liste1 = [int(ligne[2]), int(ligne[5]), int(ligne[8]), int(ligne[11])]
@@ -99,34 +106,29 @@ def load():
     print(liste)
 
 def save():
-    res = 0
-    input = ""
-    f_liste = []
-    f = open("Names of the games", 'r')
-    f_liste = f.readlines()
-    input = simpledialog.askstring(title="Save", prompt="Name of the game ?")
-    input = input + '\n'
-    while input == "":
-        for x in f_liste:
-            if input != x:
-                res += 1
-            else:
-                input = simpledialog.askstring(title="Save", prompt="Name of the game ?")
-                input = input + '\n'
-    input = input - '\n'
+    """ Enregistre la partie, avec comme nom automatique le nombre de parties déjà enregistrées (Si 4 parties enregistrées, nom de celle-ci = 5) """
+    global res
 
-    sauvegarde = open("Saved games", "a")
-    names = open("Names of the games", "a")
+    new_res = int(res)
+    new_res += 1
+    res = new_res
+
+    sauvegarde = open("Saved games.txt", "a")
+    names = open("Names of the games.txt", "w")
 
     sauvegarde.write(str(matrice) + '\n')
-    names.write(input + '\n')
+    names.write(str(res))
 
     sauvegarde.close()
     names.close()
     
-    showinfo("Sauvegarde", "Votre partie a été enregistrée avec succès dans le dossier de votre code sous le nom 'Saved games' !")
+    showinfo("Sauvegarde", "Votre partie a été enregistrée avec succès dans le dossier de votre code sous le nom "+str(res)+" !")
+
+    return res
 
 def deplacement():
+    """ Vérifie toutes les conditions afin de déplacer les carrés vers la gauche (fusion de carrés et déplacament dans les cases vides) """
+
 
     global k
 
@@ -314,6 +316,7 @@ def deplacement():
         pass
 
 def left():
+    """ Déplacement simple à gauche, puis affichage """
 
     deplacement()
     affichage()
@@ -322,6 +325,7 @@ def left():
 
 
 def up():
+    """ Rotation de la matrice vers la gauche, puis déplacement, puis rotation de la matrice vers la droite, puis affichage """
     MU = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
     for i in range (0,4):
         for j in range (0,4):
@@ -344,6 +348,7 @@ def up():
     return matrice
 
 def down():
+    """ Rotation de la matrice vers la droite, puis déplacement, puis rotation de la matrice vers la gauche, puis affichage """
     MU = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
     for i in range (0,4):
         for j in range (0,4):
@@ -366,6 +371,7 @@ def down():
     return matrice
 
 def right():
+    """ Rotation de la matrice vers la gauche 2 fois, puis déplacement, puis rotation de la matrice vers la droite 2 fois, puis affichage """
     MU = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
     for i in range (0,4):
         for j in range (0,4):
@@ -388,6 +394,7 @@ def right():
     return matrice
 
 def end():
+    """ Vérification s'il y a encore des possibilités de mouvement, ou si le joueur a atteint 2048 """
     end = 0
     total = 0
     for i in range (0,4):
@@ -430,11 +437,8 @@ def end():
 
 # Programme principal
 
-def coup():
-    affichage()
-    return
-
 def affichage():
+    """ Affiche les cases avec les bonnes valeurs et les bonnes couleurs après un déplacement """
     color = []
     number = []
     for i in range (0,4):
